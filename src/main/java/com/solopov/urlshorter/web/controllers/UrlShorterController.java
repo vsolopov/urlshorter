@@ -1,6 +1,5 @@
 package com.solopov.urlshorter.web.controllers;
 
-import com.solopov.urlshorter.exceptions.LinkNotFoundException;
 import com.solopov.urlshorter.sevices.UrlShorterService;
 import com.solopov.urlshorter.web.dto.UrlGenerateRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -29,14 +28,9 @@ public class UrlShorterController {
 
     @GetMapping("/{shortenUrlId}")
     public ResponseEntity<?> redirect(@PathVariable String shortenUrlId) {
-        try {
             return ResponseEntity.status(MOVED_PERMANENTLY)
                     .header(HttpHeaders.LOCATION, service.fetch(shortenUrlId))
                     .build();
-
-        } catch (LinkNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
     }
 
 }
