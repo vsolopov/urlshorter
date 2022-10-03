@@ -1,4 +1,4 @@
-package com.solopov.urlshorter.exceptions;
+package com.solopov.urlshorter.exception;
 
 public class LinkNotFoundException extends RuntimeException {
 }

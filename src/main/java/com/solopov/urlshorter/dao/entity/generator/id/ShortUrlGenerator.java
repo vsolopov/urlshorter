@@ -1,4 +1,4 @@
-package com.solopov.urlshorter.dao.entities.generators.id;
+package com.solopov.urlshorter.dao.entity.generator.id;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hibernate.HibernateException;

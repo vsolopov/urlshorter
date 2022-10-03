@@ -1,6 +1,6 @@
 package com.solopov.urlshorter.web.mapper;
 
-import com.solopov.urlshorter.dao.entities.ShortenedUrl;
+import com.solopov.urlshorter.dao.entity.ShortenedUrl;
 import com.solopov.urlshorter.web.dto.UrlRequestDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

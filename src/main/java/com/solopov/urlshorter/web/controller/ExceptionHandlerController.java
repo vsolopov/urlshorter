@@ -1,6 +1,6 @@
-package com.solopov.urlshorter.web.controllers;
+package com.solopov.urlshorter.web.controller;
 
-import com.solopov.urlshorter.exceptions.LinkNotFoundException;
+import com.solopov.urlshorter.exception.LinkNotFoundException;
 import com.solopov.urlshorter.web.dto.ExceptionDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

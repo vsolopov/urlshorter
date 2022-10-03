@@ -1,4 +1,4 @@
-package com.solopov.urlshorter.dao.entities;
+package com.solopov.urlshorter.dao.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ public class ShortenedUrl {
     @GeneratedValue(generator = "custom-generator", strategy = GenerationType.IDENTITY)
     @GenericGenerator(
             name = "custom-generator",
-            strategy = "com.solopov.urlshorter.dao.entities.generators.id.ShortUrlGenerator"
+            strategy = "com.solopov.urlshorter.dao.entity.generator.id.ShortUrlGenerator"
     )
     private String id;
 

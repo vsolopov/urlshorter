@@ -1,9 +1,9 @@
-package com.solopov.urlshorter.sevices.impl;
+package com.solopov.urlshorter.sevice.impl;
 
-import com.solopov.urlshorter.dao.entities.ShortenedUrl;
-import com.solopov.urlshorter.dao.repositories.ShortenedUrlRepository;
-import com.solopov.urlshorter.exceptions.LinkNotFoundException;
-import com.solopov.urlshorter.sevices.UrlShorterService;
+import com.solopov.urlshorter.dao.entity.ShortenedUrl;
+import com.solopov.urlshorter.dao.repository.ShortenedUrlRepository;
+import com.solopov.urlshorter.exception.LinkNotFoundException;
+import com.solopov.urlshorter.sevice.UrlShorterService;
 import com.solopov.urlshorter.web.dto.UrlRequestDto;
 import com.solopov.urlshorter.web.mapper.UrlRequestMapper;
 import lombok.RequiredArgsConstructor;

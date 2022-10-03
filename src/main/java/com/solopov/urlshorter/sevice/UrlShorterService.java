@@ -1,4 +1,4 @@
-package com.solopov.urlshorter.sevices;
+package com.solopov.urlshorter.sevice;
 
 
 import com.solopov.urlshorter.web.dto.UrlRequestDto;

@@ -1,6 +1,6 @@
-package com.solopov.urlshorter.web.controllers;
+package com.solopov.urlshorter.web.controller;
 
-import com.solopov.urlshorter.sevices.UrlShorterService;
+import com.solopov.urlshorter.sevice.UrlShorterService;
 import com.solopov.urlshorter.web.dto.UrlRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
