@@ -4,15 +4,13 @@ import com.solopov.urlshorter.dao.entities.ShortenedUrl;
 import com.solopov.urlshorter.dao.repositories.ShortenedUrlRepository;
 import com.solopov.urlshorter.exceptions.LinkNotFoundException;
 import com.solopov.urlshorter.sevices.UrlShorterService;
-import com.solopov.urlshorter.web.dto.UrlGenerateRequestDto;
+import com.solopov.urlshorter.web.dto.UrlRequestDto;
+import com.solopov.urlshorter.web.mapper.UrlRequestMapper;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.jpa.repository.Lock;
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.LockModeType;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @Service
 @RequiredArgsConstructor
@@ -20,23 +18,18 @@ public class UrlShorterServiceImpl implements UrlShorterService {
 
     private final ShortenedUrlRepository shortenedRepository;
 
-    @Value("${com.solopov.urlshorter.service.url}")
-    private String rootUrl;
-
-    @Value("${com.solopov.urlshorter.service.api.shorten.url}")
-    private String shortenUrlPath;
-
-
     @Retryable
     @Override
-    @Lock(LockModeType.WRITE)
-    public String shorten(UrlGenerateRequestDto dto) {
-        return appendServiceHost(shortenedRepository.save(dto.convert()).getId());
+    public String shorten(UrlRequestDto dto) {
+
+        ShortenedUrl shortenedUrl = UrlRequestMapper.INSTANCE.toShortenedUrl(dto);
+        String urlPartPath = shortenedRepository.save(shortenedUrl).getId();
+
+        return appendServiceHost(urlPartPath);
     }
 
     @Cacheable("shortenedToOriginal")
     @Override
-    @Lock(LockModeType.READ)
     public String fetch(String shorted) {
         return shortenedRepository.findById(shorted)
                 .map(ShortenedUrl::getOriginalUrl)
@@ -44,6 +37,8 @@ public class UrlShorterServiceImpl implements UrlShorterService {
     }
 
     private String appendServiceHost(String urlPath) {
-        return rootUrl + shortenUrlPath + "/" + urlPath;
+        return ServletUriComponentsBuilder.fromCurrentRequest()
+                .pathSegment(urlPath).build()
+                .toUriString();
     }
 }

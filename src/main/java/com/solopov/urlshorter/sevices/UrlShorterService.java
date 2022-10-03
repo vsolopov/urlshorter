@@ -1,10 +1,10 @@
 package com.solopov.urlshorter.sevices;
 
 
-import com.solopov.urlshorter.web.dto.UrlGenerateRequestDto;
+import com.solopov.urlshorter.web.dto.UrlRequestDto;
 
 public interface UrlShorterService {
-    String shorten(UrlGenerateRequestDto dto);
+    String shorten(UrlRequestDto dto);
 
     String fetch(String shorted);
 }

@@ -10,11 +10,11 @@ import java.util.Locale;
 
 public class ShortUrlGenerator implements IdentifierGenerator {
 
-    private final static Integer SHORT_LINK_SIZE = 4;
+    private final static Integer URL_KEY_LENGTH = 4;
 
     @Override
     public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
-        return RandomStringUtils.random(SHORT_LINK_SIZE,true,true).toUpperCase(Locale.ROOT);
+        return RandomStringUtils.randomAlphanumeric(URL_KEY_LENGTH).toUpperCase(Locale.ROOT);
     }
 
 }

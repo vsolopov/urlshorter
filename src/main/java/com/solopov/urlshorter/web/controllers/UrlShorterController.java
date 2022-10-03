@@ -1,7 +1,7 @@
 package com.solopov.urlshorter.web.controllers;
 
 import com.solopov.urlshorter.sevices.UrlShorterService;
-import com.solopov.urlshorter.web.dto.UrlGenerateRequestDto;
+import com.solopov.urlshorter.web.dto.UrlRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +20,7 @@ public class UrlShorterController {
     private final UrlShorterService service;
 
     @PostMapping
-    public ResponseEntity<?> generateLink(@Valid @RequestBody UrlGenerateRequestDto dto) {
+    public ResponseEntity<?> generateLink(@Valid @RequestBody UrlRequestDto dto) {
         return ResponseEntity
                 .created(URI.create(service.shorten(dto)))
                 .build();
@@ -28,9 +28,9 @@ public class UrlShorterController {
 
     @GetMapping("/{shortenUrlId}")
     public ResponseEntity<?> redirect(@PathVariable String shortenUrlId) {
-            return ResponseEntity.status(MOVED_PERMANENTLY)
-                    .header(HttpHeaders.LOCATION, service.fetch(shortenUrlId))
-                    .build();
+        return ResponseEntity.status(MOVED_PERMANENTLY)
+                .header(HttpHeaders.LOCATION, service.fetch(shortenUrlId))
+                .build();
     }
 
 }
