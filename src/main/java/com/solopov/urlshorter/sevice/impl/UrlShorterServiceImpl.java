@@ -2,7 +2,7 @@ package com.solopov.urlshorter.sevice.impl;
 
 import com.solopov.urlshorter.dao.entity.ShortenedUrl;
 import com.solopov.urlshorter.dao.repository.ShortenedUrlRepository;
-import com.solopov.urlshorter.exception.LinkNotFoundException;
+import com.solopov.urlshorter.exception.UrlNotFoundException;
 import com.solopov.urlshorter.sevice.UrlShorterService;
 import com.solopov.urlshorter.web.dto.UrlRequestDto;
 import com.solopov.urlshorter.web.mapper.UrlRequestMapper;
@@ -28,12 +28,12 @@ public class UrlShorterServiceImpl implements UrlShorterService {
         return appendServiceHost(urlPartPath);
     }
 
-    @Cacheable("shortenedToOriginal")
+    @Cacheable("urls")
     @Override
     public String fetch(String shorted) {
         return shortenedRepository.findById(shorted)
                 .map(ShortenedUrl::getOriginalUrl)
-                .orElseThrow(LinkNotFoundException::new);
+                .orElseThrow(UrlNotFoundException::new);
     }
 
     private String appendServiceHost(String urlPath) {

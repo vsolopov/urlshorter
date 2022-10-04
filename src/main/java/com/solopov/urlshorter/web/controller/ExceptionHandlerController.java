@@ -1,6 +1,6 @@
 package com.solopov.urlshorter.web.controller;
 
-import com.solopov.urlshorter.exception.LinkNotFoundException;
+import com.solopov.urlshorter.exception.UrlNotFoundException;
 import com.solopov.urlshorter.web.dto.ExceptionDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public class ExceptionHandlerController {
         return new ResponseEntity<>(new ExceptionDto(message.toString(), status), status);
     }
 
-    @ExceptionHandler(LinkNotFoundException.class)
+    @ExceptionHandler(UrlNotFoundException.class)
     protected ResponseEntity<?> linkNotFoundException() {
         HttpStatus status = HttpStatus.NO_CONTENT;
         return new ResponseEntity<>(new ExceptionDto("Link does not found", status), status);
